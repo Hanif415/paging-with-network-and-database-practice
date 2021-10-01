@@ -3,7 +3,7 @@ package com.example.android.pagefromnetworkanddatabasepractice.api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -18,7 +18,7 @@ interface NewsApiService {
     ): News
 
     companion object {
-        const val BASE_URL = "https://newsapi.org/v2/"
+        private const val BASE_URL = "https://newsapi.org/v2/"
         const val API_KEY = "09f0da02db16499a90e3c6b452b9a49d"
 
         fun create(): NewsApiService {
@@ -32,7 +32,7 @@ interface NewsApiService {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(NewsApiService::class.java)
         }
